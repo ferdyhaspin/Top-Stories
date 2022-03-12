@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
 /**
- * Created by ferdyhaspin 02/11/21.
- * Copyright (c) 2021 Qarib Apps All rights reserved.
+ * Created by ferdyhaspin on 12/03/22.
  */
 abstract class BaseActivity : AppCompatActivity() {
 

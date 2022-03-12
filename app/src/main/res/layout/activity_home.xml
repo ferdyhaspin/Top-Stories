@@ -25,15 +25,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space"
         android:fontFamily="@font/lato_regular"
-        android:text="Earn-IT threatens encryption and therefore user freedom"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/font_xmedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvMyFav" />
+        app:layout_constraintTop_toBottomOf="@id/tvMyFav"
+        tools:text="Earn-IT threatens encryption and therefore user freedom" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTopStories"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/space_x2"
@@ -46,4 +47,12 @@
         tools:itemCount="12"
         tools:listitem="@layout/item_story" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFavorite" />
 </androidx.constraintlayout.widget.ConstraintLayout>
