@@ -1,18 +1,33 @@
 package org.ferdyhaspin.topstories.data.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
+@Entity(tableName = "item")
 data class Item(
-    val score: Int? = null,
-    val by: String? = null,
-    val id: Int? = null,
-    val time: Int? = null,
-    val title: String? = null,
-    val type: String? = null,
-    val descendants: Int? = null,
-    val url: String? = null,
-    val kids: List<Int?>? = null
+    @PrimaryKey
+    @SerializedName("id")
+    var id: Int = 0,
+
+    @SerializedName("score")
+    var score: Int = 0,
+    @SerializedName("by")
+    var by: String = "",
+    @SerializedName("time")
+    var time: Int = 0,
+    @SerializedName("title")
+    var title: String = "",
+    @SerializedName("type")
+    var type: String = "",
+    @SerializedName("descendants")
+    var descendants: Int = 0,
+    @SerializedName("url")
+    var url: String = "",
+
+    @SerializedName("kids")
+    var kids: List<Int> = mutableListOf(),
 ) : Parcelable

@@ -1,6 +1,7 @@
 package org.ferdyhaspin.topstories.di
 
 import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -8,8 +9,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import org.ferdyhaspin.topstories.data.local.AppDatabase
+import org.ferdyhaspin.topstories.data.local.dao.StoryDao
 import org.ferdyhaspin.topstories.data.remote.config.ServiceGenerator
-import java.util.*
 import javax.inject.Singleton
 
 @Suppress("unused")
@@ -34,8 +36,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocale(): Locale {
-        return Locale("in")
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context.applicationContext,
+            AppDatabase::class.java,
+            "topstories.db"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideTransactionDao(database: AppDatabase): StoryDao {
+        return database.storyDao()
     }
 
 }

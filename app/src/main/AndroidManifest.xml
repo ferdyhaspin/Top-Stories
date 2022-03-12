@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TopStories">
         <activity
+            android:label="Story Detail"
             android:name=".ui.component.detail.DetailActivity"
             android:exported="false" />
         <activity

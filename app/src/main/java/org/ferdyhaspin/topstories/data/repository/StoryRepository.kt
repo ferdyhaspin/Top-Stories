@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import org.ferdyhaspin.topstories.BuildConfig
 import org.ferdyhaspin.topstories.data.Error
 import org.ferdyhaspin.topstories.data.Resource
+import org.ferdyhaspin.topstories.data.local.dao.StoryDao
 import org.ferdyhaspin.topstories.data.model.Item
 import org.ferdyhaspin.topstories.data.remote.config.SafeApiRequest
 import org.ferdyhaspin.topstories.data.remote.config.ServiceGenerator
@@ -17,9 +18,13 @@ import javax.inject.Inject
  */
 class StoryRepository @Inject constructor(
     service: ServiceGenerator,
+    private val storyDao: StoryDao
 ) : SafeApiRequest() {
 
     val items: LiveData<Resource<Item>> = MutableLiveData()
+    val favItem: LiveData<Item> = MutableLiveData()
+
+    val insertFavorite: LiveData<Boolean> = MutableLiveData()
 
     private val service = service.createService(
         StoryService::class.java,
@@ -40,5 +45,14 @@ class StoryRepository @Inject constructor(
             items.post(Resource.DataError(Error(e)))
             e.printStackTrace()
         }
+    }
+
+    suspend fun getFavorite() {
+        val favData = storyDao.getFavorite() ?: Item()
+        favItem.post(favData)
+    }
+
+    suspend fun insertFavorite(item: Item) {
+        storyDao.updateInsert(item)
     }
 }

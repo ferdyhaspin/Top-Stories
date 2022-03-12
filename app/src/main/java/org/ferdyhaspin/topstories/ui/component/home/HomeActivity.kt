@@ -6,9 +6,12 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.hilt.android.AndroidEntryPoint
 import net.matsudamper.viewbindingutil.inflateViewBinding
+import org.ferdyhaspin.topstories.R
 import org.ferdyhaspin.topstories.data.Resource
+import org.ferdyhaspin.topstories.data.model.Item
 import org.ferdyhaspin.topstories.databinding.ActivityHomeBinding
 import org.ferdyhaspin.topstories.ui.base.BaseActivity
+import org.ferdyhaspin.topstories.ui.component.detail.DetailActivity
 import org.ferdyhaspin.topstories.utils.observe
 import org.ferdyhaspin.topstories.utils.toGoneIf
 import org.ferdyhaspin.topstories.utils.toast
@@ -40,15 +43,33 @@ class HomeActivity : BaseActivity() {
                 is Resource.Success -> {
                     val item = it.data
                     if (item != null) {
-                        mAdapter.add(HomeItem(item))
+                        mAdapter.add(HomeItem(item) {
+                            toDetail(item)
+                        })
                         mAdapter.notifyItemInserted(mAdapter.itemCount)
                     }
                 }
+            }
+        }
+
+        observe(viewModel.favItem) { item ->
+            if (item.id != 0) {
+                binding.tvFavorite.text = item.title
+                binding.tvFavorite.setOnClickListener {
+                    toDetail(item = item)
+                }
+            } else {
+                binding.tvFavorite.text = getString(R.string.label_favorite_not_set)
             }
         }
     }
 
     private fun setLoading(isLoading: Boolean) {
         binding.progressBar.toGoneIf(!isLoading)
+    }
+
+    private fun toDetail(item: Item) {
+        val intent = DetailActivity.newIntent(this, item)
+        startActivity(intent)
     }
 }

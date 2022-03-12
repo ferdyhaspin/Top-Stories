@@ -16,9 +16,11 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     val items = repository.items
+    val favItem = repository.favItem
 
     init {
         Coroutines.io {
+            repository.getFavorite()
             repository.getItems()
         }
     }
