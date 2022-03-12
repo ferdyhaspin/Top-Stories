@@ -2,6 +2,7 @@ package org.ferdyhaspin.topstories.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
@@ -30,4 +31,8 @@ data class Item(
 
     @SerializedName("kids")
     var kids: List<Int> = mutableListOf(),
+
+    @Ignore
+    @SerializedName("text")
+    var text: String = "",
 ) : Parcelable

@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    repository: StoryRepository
+    private val repository: StoryRepository
 ) : ViewModel() {
 
     val items = repository.items
@@ -20,8 +20,11 @@ class HomeViewModel @Inject constructor(
 
     init {
         Coroutines.io {
-            repository.getFavorite()
             repository.getItems()
         }
+    }
+
+    fun getFavorite() = Coroutines.io {
+        repository.getFavorite()
     }
 }

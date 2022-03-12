@@ -2,6 +2,8 @@
     <string name="app_name">Top Stories</string>
     <string name="label_my_favorite">My Favorite</string>
     <string name="label_score">Score : %1$d</string>
-    <string name="label_comment">8 Comments</string>
+    <string name="label_comment">Comments</string>
     <string name="label_favorite_not_set">Favorite not set</string>
+    <string name="label_description">Description</string>
+    <string name="dummy_desc">Could be engineering, interpersonal, strategic, etc. This is purposefully open-ended.</string>
 </resources>

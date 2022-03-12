@@ -16,13 +16,17 @@ abstract class StoryDao {
     @Update
     abstract fun update(obj: Item)
 
+    @Delete
+    abstract suspend fun delete(obj: Item)
+
     @Transaction
     open suspend fun updateInsert(obj: Item) {
-        val id = insert(obj)
-        if (id == -1L) {
-            update(obj)
-        }
+        delete()
+        insert(obj)
     }
+
+    @Query("DELETE FROM item")
+    abstract suspend fun delete()
 
     @Query("SELECT * FROM item LIMIT 1")
     abstract suspend fun getFavorite(): Item?

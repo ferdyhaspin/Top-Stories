@@ -27,6 +27,11 @@ class HomeActivity : BaseActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFavorite()
+    }
+
     override fun onObserveAction() {
         val mAdapter = GroupAdapter<GroupieViewHolder>()
         binding.rvTopStories.apply {

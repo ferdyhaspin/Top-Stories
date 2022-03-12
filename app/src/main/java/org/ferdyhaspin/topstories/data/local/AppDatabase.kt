@@ -12,7 +12,7 @@ import org.ferdyhaspin.topstories.data.model.Item
 
 @Database(
     entities = [Item::class],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 

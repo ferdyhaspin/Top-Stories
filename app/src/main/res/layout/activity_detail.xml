@@ -4,6 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:padding="@dimen/space_x2"
     tools:context=".ui.component.detail.DetailActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space"
+        android:fontFamily="@font/lato_regular"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/font_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Earn-IT threatens encryption and therefore user freedom" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_x2"
+        android:layout_marginBottom="@dimen/space"
+        android:fontFamily="@font/lato_regular"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/font_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="By jamestimmins\n22/11/2018" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/ibInsertFav"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="@id/tvDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvDate"
+        app:srcCompat="@drawable/ic_star" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_x2"
+        android:layout_marginBottom="@dimen/space"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/label_description"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/font_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDate" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space"
+        android:layout_marginBottom="@dimen/space"
+        android:fontFamily="@font/lato_regular"
+        android:text="@string/dummy_desc"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/font_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelDesc" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_x2"
+        android:layout_marginBottom="@dimen/space"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/label_comment"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/font_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDesc" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvComment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/space"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvComment"
+        tools:itemCount="12"
+        tools:listitem="@layout/item_comment" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_x2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvComment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,8 @@ class StoryRepository @Inject constructor(
     val items: LiveData<Resource<Item>> = MutableLiveData()
     val favItem: LiveData<Item> = MutableLiveData()
 
-    val insertFavorite: LiveData<Boolean> = MutableLiveData()
+    val comments: LiveData<Resource<List<Item>>> = MutableLiveData()
+    val isFavoriteData: LiveData<Boolean> = MutableLiveData()
 
     private val service = service.createService(
         StoryService::class.java,
@@ -52,7 +53,46 @@ class StoryRepository @Inject constructor(
         favItem.post(favData)
     }
 
-    suspend fun insertFavorite(item: Item) {
+    private fun setFavoriteData(favorite: Boolean) {
+        isFavoriteData.post(favorite)
+    }
+
+    suspend fun isFavoriteData(item: Item) {
+        val favData = storyDao.getFavorite() ?: Item()
+        setFavoriteData(favData == item)
+    }
+
+    suspend fun actionFavorite(item: Item) {
+        if (isFavoriteData.value == true) {
+            deleteFavorite(item)
+        } else {
+            insertFavorite(item)
+        }
+    }
+
+    private suspend fun insertFavorite(item: Item) {
         storyDao.updateInsert(item)
+        setFavoriteData(true)
+    }
+
+    private suspend fun deleteFavorite(item: Item) {
+        storyDao.delete(item)
+        setFavoriteData(false)
+    }
+
+    suspend fun getComments(ids: List<Int>) {
+        comments.post(Resource.Loading())
+        try {
+            val content = mutableListOf<Item>()
+            ids.forEach {
+                val data = apiRequest { service.getItem(it.toString()) }
+                content.add(data)
+            }
+            comments.post(Resource.Success(content))
+
+        } catch (e: Exception) {
+            comments.post(Resource.DataError(Error(e)))
+            e.printStackTrace()
+        }
     }
 }
