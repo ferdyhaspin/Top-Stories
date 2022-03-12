@@ -1,0 +1,89 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    id "kotlin-parcelize"
+    id "dagger.hilt.android.plugin"
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "org.ferdyhaspin.topstories"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.code
+        versionName versions.name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
+    buildTypes.each {
+        it.buildConfigField "String", "BASE_URL", baseUrl
+    }
+}
+
+dependencies {
+    // ANDROID X
+    implementation "androidx.annotation:annotation:$versions.androidxAnnotation"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidxLifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidxLifecycle"
+    implementation "androidx.core:core-ktx:$versions.androidxCore"
+    implementation "androidx.appcompat:appcompat:$versions.androidxAppCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.androidxConstraintLayout"
+
+    implementation "com.google.android.material:material:$versions.androidxMaterial"
+
+    // Hilt dependencies
+    implementation "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltVM"
+    kapt "androidx.hilt:hilt-compiler:$versions.hiltVM"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    //OKHTTP
+    implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    kapt "com.github.bumptech.glide:compiler:$versions.glide"
+    implementation("com.github.bumptech.glide:okhttp3-integration:$versions.glide") {
+        exclude group: "glide-parent"
+    }
+
+    //GROUPIE
+    implementation "com.github.lisawray.groupie:groupie:$versions.groupie"
+    implementation "com.github.lisawray.groupie:groupie-databinding:$versions.groupie"
+    implementation "com.github.lisawray.groupie:groupie-viewbinding:$versions.groupie"
+    implementation "com.github.lisawray.groupie:groupie-kotlin-android-extensions:$versions.groupie"
+
+    //TEST
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "androidx.test:runner:$versions.runner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoCore"
+}

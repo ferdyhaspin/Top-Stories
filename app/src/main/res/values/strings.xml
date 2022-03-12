@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Top Stories</string>
+    <string name="label_my_favorite">My Favorite</string>
+    <string name="label_score">Score :</string>
+    <string name="label_comment">8 Comments</string>
+</resources>
